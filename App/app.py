@@ -30,6 +30,10 @@ def index():
     conn.close()
     return render_template('index.html', posts=posts)
 
+@app.route('/game')
+def game():
+    return render_template('game.html')
+
 @app.route('/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Game</h2>
+    <div class="board">
+        {% for i in range(8) %}
+            {% for i in range(4) %}
+                <button class="piece-square light-square"></button>
+                <button class="piece-square dark-square"></button>
+            {% endfor %}
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}
