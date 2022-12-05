@@ -5,6 +5,7 @@
 import sqlite3
 from flask import Flask, render_template, request, url_for, flash, redirect
 from werkzeug.exceptions import abort
+from stockfish import Stockfish
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'tbuhquw98kd7hda0kdk2hbtrq2j4k3l2p1h5th9q'
