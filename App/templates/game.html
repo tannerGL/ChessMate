@@ -3,13 +3,100 @@
 {% block content %}
     <h2>Game</h2>
     <div class="board">
-        {% for i in range(8) %}
-            {% for i in range(4) %}
-                <button class="piece-square light-square"></button>
-                <button class="piece-square dark-square"></button>
-            {% endfor %}
-            <hr>
-        {% endfor %}
+    <!-- Create the chessboard table -->
+    <table class="chessboard">
+        <tbody>
+        <!-- Generate the rows and cells -->
+        <tr>
+            <td id="a8" class="dark" data-color="dark" data-position="a8"></td>
+            <td id="b8" class="light" data-color="light" data-position="b8"></td>
+            <td id="c8" class="dark" data-color="dark" data-position="c8"></td>
+            <td id="d8" class="light" data-color="light" data-position="d8"></td>
+            <td id="e8" class="dark" data-color="dark" data-position="e8"></td>
+            <td id="f8" class="light" data-color="light" data-position="f8"></td>
+            <td id="g8" class="dark" data-color="dark" data-position="g8"></td>
+            <td id="h8" class="light" data-color="light" data-position="h8"></td>
+        </tr>
+        <tr>
+            <td id="a7" class="dark" data-color="dark" data-position="a7"></td>
+            <td id="b7" class="light" data-color="light" data-position="b7"></td>
+            <td id="c7" class="dark" data-color="dark" data-position="c7"></td>
+            <td id="d7" class="light" data-color="light" data-position="d7"></td>
+            <td id="e7" class="dark" data-color="dark" data-position="e7"></td>
+            <td id="f7" class="light" data-color="light" data-position="f7"></td>
+            <td id="g7" class="dark" data-color="dark" data-position="g7"></td>
+            <td id="h7" class="light" data-color="light" data-position="h7"></td>
+        </tr>
+        <tr>
+            <td id="a6" class="dark" data-color="dark" data-position="a6"></td>
+            <td id="b6" class="light" data-color="light" data-position="b6"></td>
+            <td id="c6" class="dark" data-color="dark" data-position="c6"></td>
+            <td id="d6" class="light" data-color="light" data-position="d6"></td>
+            <td id="e6" class="dark" data-color="dark" data-position="e6"></td>
+            <td id="f6" class="light" data-color="light" data-position="f6"></td>
+            <td id="g6" class="dark" data-color="dark" data-position="g6"></td>
+            <td id="h6" class="light" data-color="light" data-position="h6"></td>
+        </tr>
+        <tr>
+            <td id="a5" class="dark" data-color="dark" data-position="a5"></td>
+            <td id="b5" class="light" data-color="light" data-position="b5"></td>
+            <td id="c5" class="dark" data-color="dark" data-position="c5"></td>
+            <td id="d5" class="light" data-color="light" data-position="d5"></td>
+            <td id="e5" class="dark" data-color="dark" data-position="e5"></td>
+            <td id="f5" class="light" data-color="light" data-position="f5"></td>
+            <td id="g5" class="dark" data-color="dark" data-position="g5"></td>
+            <td id="h5" class="light" data-color="light" data-position="h5"></td>
+        </tr>
+        <tr>
+            <td id="a4" class="dark" data-color="dark" data-position="a4"></td>
+            <td id="b4" class="light" data-color="light" data-position="b4"></td>
+            <td id="c4" class="dark" data-color="dark" data-position="c4"></td>
+            <td id="d4" class="light" data-color="light" data-position="d4"></td>
+            <td id="e4" class="dark" data-color="dark" data-position="e4"></td>
+            <td id="f4" class="light" data-color="light" data-position="f4"></td>
+            <td id="g4" class="dark" data-color="dark" data-position="g4"></td>
+            <td id="h4" class="light" data-color="light" data-position="h4"></td>
+        </tr>
+        <tr>
+            <td id="a3" class="dark" data-color="dark" data-position="a3"></td>
+            <td id="b3" class="light" data-color="light" data-position="b3"></td>
+            <td id="c3" class="dark" data-color="dark" data-position="c3"></td>
+            <td id="d3" class="light" data-color="light" data-position="d3"></td>
+            <td id="e3" class="dark" data-color="dark" data-position="e3"></td>
+            <td id="f3" class="light" data-color="light" data-position="f3"></td>
+            <td id="g3" class="dark" data-color="dark" data-position="g3"></td>
+            <td id="h3" class="light" data-color="light" data-position="h3"></td>
+        </tr>
+        <tr>
+            <td id="a2" class="dark" data-color="dark" data-position="a2"></td>
+            <td id="b2" class="light" data-color="light" data-position="b2"></td>
+            <td id="c2" class="dark" data-color="dark" data-position="c2"></td>
+            <td id="d2" class="light" data-color="light" data-position="d2"></td>
+            <td id="e2" class="dark" data-color="dark" data-position="e2"></td>
+            <td id="f2" class="light" data-color="light" data-position="f2"></td>
+            <td id="g2" class="dark" data-color="dark" data-position="g2"></td>
+            <td id="h2" class="light" data-color="light" data-position="h2"></td>
+        </tr>
+        <tr>
+            <td id="a1" class="dark" data-color="dark" data-position="a1"></td>
+            <td id="b1" class="light" data-color="light" data-position="b1"></td>
+            <td id="c1" class="dark" data-color="dark" data-position="c1"></td>
+            <td id="d1" class="light" data-color="light" data-position="d1"></td>
+            <td id="e1" class="dark" data-color="dark" data-position="e1"></td>
+            <td id="f1" class="light" data-color="light" data-position="f1"></td>
+            <td id="g1" class="dark" data-color="dark" data-position="g1"></td>
+            <td id="h1" class="light" data-color="light" data-position="h1"></td>
+        </tr>
+        </tbody>
+    </table>
+    
+    <!-- Add some controls -->
+    <div class="controls">
+        <button id="new-game">New Game</button>
+        <button id="undo">Undo</button>
     </div>
-    <script src="../js_source/chessmate.js"></script>
+    
+    <!-- Include chess.js and our custom script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script type="text/javascript" src="../static/scripts/chessmate.js"></script>
 {% endblock %}

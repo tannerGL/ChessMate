@@ -41,7 +41,6 @@ def login():
     user = args.get('username')
     password = args.get('password')
 
-
     if None not in (user, password):
         return render_template('index.html')
 
