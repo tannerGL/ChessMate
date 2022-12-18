@@ -5,6 +5,7 @@
 import sqlite3
 from flask import Flask, render_template, request, url_for, flash, redirect
 from werkzeug.exceptions import abort
+from stockfish import Stockfish
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'tbuhquw98kd7hda0kdk2hbtrq2j4k3l2p1h5th9q'
@@ -30,14 +31,40 @@ def index():
     conn.close()
     return render_template('index.html', posts=posts)
 
+@app.route('/create_account')
+def create_account():
+    return render_template('create_account.html')
+
+@app.route('/login')
+def login():
+    args = request.args
+    user = args.get('username')
+    password = args.get('password')
+
+
+    if None not in (user, password):
+        return render_template('index.html')
+
+    return render_template('login.html')
+
+
+
 @app.route('/game')
 def game():
     return render_template('game.html')
 
-@app.route('/<int:post_id>')
-def post(post_id):
-    post = get_post(post_id)
-    return render_template('post.html', post=post)
+@app.route('/move/<current_fen>/<move>')
+def stockfish_query_move(current_fen, move):
+    stockfish_engine = Stockfish()
+
+    fen, status = stockfish_engine.check_move_and_get_fen(current_fen, move)
+
+    if status > 0:
+        score_or_bad_move = stockfish_engine.analyse_position()
+    else:
+        score_or_bad_move = "ILLEGAL OR INVALID MOVE"
+    
+    return (fen, score_or_bad_move)
 
 @app.route('/create', methods=('GET', 'POST'))
 def create():
