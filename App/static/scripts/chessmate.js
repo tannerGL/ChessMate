@@ -19,6 +19,7 @@ cells.forEach(function(cell) {
 // Handle clicks on cells
 function handleCellClick(event) {
   var cell = event.target;
+  console.log(selectedCell);
   // If a cell is already selected, try to move the piece
   if (selectedCell) {
     var source = selectedCell.getAttribute('data-position');
@@ -34,8 +35,8 @@ function handleCellClick(event) {
   }
   // Otherwise, select the cell
   else {
-    selectedCell = cell;
-    cell.classList.add('selected');
+    selectedCell = cell.parentElement;
+    selectedCell.classList.add('selected');
   }
 }
 
