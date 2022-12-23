@@ -3,9 +3,10 @@
 # 11/26/2022
 
 import sqlite3
+import db.chess_mate_data_base_handler as cmdb
 from flask import Flask, render_template, request, url_for, flash, redirect
 from werkzeug.exceptions import abort
-from stockfish import Stockfish
+from stockfish.stockfish import Stockfish
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'tbuhquw98kd7hda0kdk2hbtrq2j4k3l2p1h5th9q'
@@ -26,9 +27,6 @@ def get_post(post_id):
 
 @app.route('/')
 def index():
-    conn = get_db_connection()
-    posts = conn.execute('SELECT * FROM posts').fetchall()
-    conn.close()
     return render_template('index.html', posts=posts)
 
 @app.route('/create_account')
