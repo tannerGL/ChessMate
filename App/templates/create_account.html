@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<script type="text/javascript" src="../static/scripts/login.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -17,10 +16,10 @@
       <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
       <input type="email" name="email" id="email-field" class="login-form-field" placeholder="E-mail">
       <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
-      <input type="password" name="retype_password" id="password_field" class="login-form-field" placeholder="Retype Password">
-      <input type="submit" value="Create Account" id="login-form-submit">
+      <input type="password" name="retype_password" id="password-field" class="login-form-field" placeholder="Retype Password">
+      <input type="button" value="Create Account" id="login-form-submit">
     </form>
   
   </main>
-  
+  <script type="text/javascript" src="../static/scripts/login.js"></script>
 {% endblock %}
