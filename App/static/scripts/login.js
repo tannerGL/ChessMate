@@ -5,7 +5,7 @@ const loginErrorMsg = document.getElementById("login-error-msg");
 
 function authenticate(user, pass)
 {
-    var success = false;
+    return new Promise(
     $.ajax({
         type: "POST",
         url: '/attempt_create', 
@@ -14,24 +14,23 @@ function authenticate(user, pass)
             password: pass,
         },
     success: function(data) {
-        console.log(data);
-        success = true;
-        alert("SUCCESS");
+        loginButton.setAttribute('status', data)
     },
-    });
-    return success;
+    }));
+    
 }
 
-loginButton.addEventListener("click", (e) => {
+
+loginButton.addEventListener("click", async (e) => {
     e.preventDefault();
     const username = loginForm.username.value;
     const password = loginForm.password.value;
-
-    if (authenticate(username,password) === true){
-        $.ajax({
-            type: "GET",
-            url: '/game',
-        });
+    
+    await authenticate(username,password);
+    
+    if (loginButton.getAttribute('status') === 'True'){
+        window.location.href = '/';
+        window.location.reload();
     }
     else {
         loginErrorMsg.style.opacity = 1;

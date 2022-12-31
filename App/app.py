@@ -21,7 +21,7 @@ def create_account():
 
 @app.route('/attempt_create', methods = ['POST'])
 def attempt_create(): # attempt to create an account
-    return render_template('game.html')
+    return 'True'
 
 @app.route('/login')
 def login():
