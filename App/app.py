@@ -19,9 +19,25 @@ def index():
 def create_account():
     return render_template('create_account.html')
 
-@app.route('/attempt_create', methods = ['POST'])
-def attempt_create(): # attempt to create an account
+
+@app.route('/process_creation', methods=['POST'])
+def process_creation():
+    args = request.form
+    user = args.get('username')
+    email = args.get('email')
+    password = args.get('password')
+
+    print(user)
+
+    handler = cmdb.DBHandler()
+    handler.get_db_connection()
+
+    signal = handler.create_account(user, email, password)
+
+    if False in signal:
+        return 'False'
     return 'True'
+
 
 @app.route('/login')
 def login():
@@ -29,10 +45,12 @@ def login():
     user = args.get('username')
     password = args.get('password')
 
+
     if None not in (user, password):
         return render_template('index.html')
 
     return render_template('login.html')
+
 
 
 @app.route('/game')
