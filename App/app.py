@@ -27,10 +27,7 @@ def process_creation():
     email = args.get('email')
     password = args.get('password')
 
-    print(user)
-
     handler = cmdb.DBHandler()
-    handler.get_db_connection()
 
     signal = handler.create_account(user, email, password)
 

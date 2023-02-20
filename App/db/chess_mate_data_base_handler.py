@@ -14,14 +14,18 @@ class DBHandler:
         self.cur = self.conn.cursor()
 
     def create_account(self, user, email, pwd):
+        self.get_db_connection()
         hashable_user = bytes(user, encoding='utf-8')
         hashable_email = bytes(email, encoding='utf-8')
         hashable_pass = bytes(pwd, encoding='utf-8')
+        print(hashable_pass)
 
         hashed_user = bcrypt.hashpw(hashable_user, bcrypt.gensalt())
         hashed_email = bcrypt.hashpw(hashable_email, bcrypt.gensalt())
         hashed_pass = bcrypt.hashpw(hashable_pass, bcrypt.gensalt())
         
+        print(hashed_pass)
+
         db_check = self.cur.execute('SELECT * FROM accounts WHERE username=?', (hashed_user,))
 
         if hashed_user in db_check:
@@ -31,6 +35,7 @@ class DBHandler:
 
         self.cur.execute('INSERT INTO accounts (username, email, pwd) VALUES(?,?,?)', (hashed_user, hashed_email, hashed_pass))
 
+        self.conn.commit()
         return ('pwd', True)
 
     def login(self, account, pwd):
