@@ -11,53 +11,49 @@ class DBHandler:
         except:
             print("db connection failed")
         self.conn.row_factory = sqlite3.Row
+        self.conn.text_factory = str
         self.cur = self.conn.cursor()
 
     def create_account(self, user, email, pwd):
         self.get_db_connection()
-        hashable_user = bytes(user, encoding='utf-8')
-        hashable_email = bytes(email, encoding='utf-8')
         hashable_pass = bytes(pwd, encoding='utf-8')
         print(hashable_pass)
 
-        hashed_user = bcrypt.hashpw(hashable_user, bcrypt.gensalt())
-        hashed_email = bcrypt.hashpw(hashable_email, bcrypt.gensalt())
         hashed_pass = bcrypt.hashpw(hashable_pass, bcrypt.gensalt())
-        
-        print(hashed_pass)
 
-        db_check = self.cur.execute('SELECT * FROM accounts WHERE username=?', (hashed_user,))
+        db_check = self.cur.execute('SELECT * FROM accounts WHERE username=?', (user,)).fetchall()
 
-        if hashed_user in db_check:
+        if user in db_check:
             return ('user', False)
-        elif hashed_email in db_check:
+        elif email in db_check:
             return('email', False)
 
-        self.cur.execute('INSERT INTO accounts (username, email, pwd) VALUES(?,?,?)', (hashed_user, hashed_email, hashed_pass))
+        self.cur.execute('INSERT INTO accounts (username, email, pwd) VALUES(?,?,?)', (user, email, hashed_pass))
 
         self.conn.commit()
         return ('pwd', True)
 
     def login(self, account, pwd):
-        hashable_account = bytes(account, encoding='uft-8')
-        hashable_pass = bytes(pwd, encoding='utf-8')
-
-        hashed_account = bcrypt.hashpw(hashable_account, bcrypt.gensalt())
-        hashed_pass = bcrypt.hashpw(hashable_pass, bcrypt.gensalt())
-
+        self.get_db_connection()
         if '@' in account:
             try:
-                db_check = self.cur.execute('SELECT * FROM accounts WHERE email="?"', hashed_account)
+                fetch = self.cur.execute("SELECT * FROM accounts WHERE email=?", (account,)).fetchall()
             except:
-                return False
+                return (False, "account")
         else:
             try:
-                db_check = self.cur.execute('SELECT * FROM accounts where username="?"', hashed_account)
+                fetch = self.cur.execute("SELECT * FROM accounts where username=?", (account,)).fetchall()
             except:
-                return False
+                return (False, "account")
 
-        if hashed_pass in db_check:
-            return True
+        db_hash = fetch[0][4]
+        salt = bytes(db_hash[:30])
+    
+        hashable_pass = bytes(pwd, encoding='utf-8')
+        hashed_pass = bcrypt.hashpw(hashable_pass, salt)
+
+        if hashed_pass == db_hash:
+            return (True, "success")
         
-        return False
+        return (False, "account")
         

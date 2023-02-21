@@ -38,17 +38,21 @@ def process_creation():
 
 @app.route('/login')
 def login():
-    args = request.args
+    return render_template('login.html')
+
+@app.route('/process_login', methods=['POST'])
+def process_login():
+    args = request.form
     user = args.get('username')
     password = args.get('password')
 
+    handler = cmdb.DBHandler()
 
-    if None not in (user, password):
-        return render_template('index.html')
+    signal = handler.login(user, password)
 
-    return render_template('login.html')
-
-
+    if False in signal:
+        return 'False'
+    return 'True'
 
 @app.route('/game')
 def game():

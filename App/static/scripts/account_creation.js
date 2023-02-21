@@ -5,8 +5,20 @@ const loginErrorMsg = document.getElementById("login-error-msg");
 
 async function authenticate(user, pass)
 {
+    // return new Promise( () => {
+    // $.ajax({
+    //     type: "POST",
+    //     url: '/attempt_create', 
+    //     data: {
+    //         username: user,
+    //         password: pass,
+    //     },
+    // success: function(data) {
+    //     loginButton.setAttribute('status', data)
+    // },
+    // })});
     var form = new FormData(loginForm);
-    await fetch('/process_login',
+    await fetch('/process_creation',
     {
         method: 'POST',
         body: form
